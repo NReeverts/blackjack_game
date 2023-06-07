@@ -13,7 +13,6 @@ class BlackJack:
         self.name = name
         self.cards = []
         self.total = 0
-        self.alive = True
 
     def __repr__(self):
         return f"Hello and welcome to {self.name}!"
@@ -100,18 +99,39 @@ class BlackJack:
 
 
 class Player:
-    def __init__(self, name, chips=100):
-        self.name = name
+    def __init__(self, chips=100):
         self.cards = []
         self.chips = chips
         self.total = 0
 
     def __repr__(self):
-        return f"{self.name} has ${self.chips} worth of chips"
+        return f"you have ${self.chips} worth of chips"
 
 
-casino1 = BlackJack("Billy Bobs Backwoods Casino")
-casino2 = BlackJack("I can't think of a good name")
-player1 = Player("Noah")
-player2 = Player("Not Noah")
-casino1.play(player1, 20)
+blackjack1 = BlackJack("Lets play: Blackjack")
+welcome_message = '''
+ /$$             /$$                              /$$                    
+| $$            | $$                             | $$                    
+| $$  /$$$$$$  /$$$$$$   /$$$$$$$        /$$$$$$ | $$  /$$$$$$  /$$   /$$
+| $$ /$$__  $$|_  $$_/  /$$_____/       /$$__  $$| $$ |____  $$| $$  | $$
+| $$| $$$$$$$$  | $$   |  $$$$$$       | $$  \ $$| $$  /$$$$$$$| $$  | $$
+| $$| $$_____/  | $$ /$$\____  $$      | $$  | $$| $$ /$$__  $$| $$  | $$
+| $$|  $$$$$$$  |  $$$$//$$$$$$$/      | $$$$$$$/| $$|  $$$$$$$|  $$$$$$$
+|__/ \_______/   \___/ |_______/       | $$____/ |__/ \_______/ \____  $$
+                                       | $$                     /$$  | $$
+                                       | $$                    |  $$$$$$/
+                                       |__/                     \______/ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.------..------..------..------..------..------..------..------..------.
+|B.--. ||L.--. ||A.--. ||C.--. ||K.--. ||J.--. ||A.--. ||C.--. ||K.--. |
+| :(): || :/\: || (\/) || :/\: || :/\: || :(): || (\/) || :/\: || :/\: |
+| ()() || (__) || :\/: || :\/: || :\/: || ()() || :\/: || :\/: || :\/: |
+| '--'B|| '--'L|| '--'A|| '--'C|| '--'K|| '--'J|| '--'A|| '--'C|| '--'K|
+`------'`------'`------'`------'`------'`------'`------'`------'`------'
+  '''
+
+print(welcome_message)
+print("welcome to Lets play Blackjack!")
+starting_chips = input("how many chips would you like to start with?")
+player1 = Player(starting_chips) 
+
