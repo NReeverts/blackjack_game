@@ -17,6 +17,9 @@ class BlackJack:
     def __repr__(self):
         return f"Hello and welcome to {self.name}!"
 
+    def reset(self):
+        self.cards, self.total = [], 0
+
     def draw_cards(self, num=1, player=None):
         for i in range(num):
             random_card = random.choice(self.deck)
@@ -86,30 +89,22 @@ class BlackJack:
                 elif self.total == player.total:
                     print("Tie")
 
-            # choice1 = input("Want to play again? y/n\n")
-            # while choice1 != "y" and choice1 != "n":
-            #   choice1 = input("Want to play again? Please enter 'y or n\n'")
-            # if choice1 == "y":
-            #   self.cards, player.cards = [], []
-            #   self.total, player.total = 0, 0
-            #   continue
-            # elif choice1 == "n":
-            #   print("Thanks for playing :)")
-            #   break
-
 
 class Player:
     def __init__(self, chips=100):
         self.cards = []
         self.chips = chips
         self.total = 0
+        self.has_chips = self.chips > 0
 
     def __repr__(self):
         return f"you have ${self.chips} worth of chips"
 
+    def reset(self):
+        self.cards, self.total = [], 0
 
-blackjack1 = BlackJack("Lets play: Blackjack")
-welcome_message = '''
+
+welcome_message = """
  /$$             /$$                              /$$                    
 | $$            | $$                             | $$                    
 | $$  /$$$$$$  /$$$$$$   /$$$$$$$        /$$$$$$ | $$  /$$$$$$  /$$   /$$
@@ -128,10 +123,63 @@ welcome_message = '''
 | ()() || (__) || :\/: || :\/: || :\/: || ()() || :\/: || :\/: || :\/: |
 | '--'B|| '--'L|| '--'A|| '--'C|| '--'K|| '--'J|| '--'A|| '--'C|| '--'K|
 `------'`------'`------'`------'`------'`------'`------'`------'`------'
-  '''
+  """
 
+blackjack1 = BlackJack("Lets play: Blackjack")
 print(welcome_message)
 print("welcome to Lets play Blackjack!")
-starting_chips = input("how many chips would you like to start with?")
-player1 = Player(starting_chips) 
+starting_chips = int(input("how many chips would you like to start with?\n"))
 
+while type(starting_chips) != int:
+    starting_chips = int(
+        input(
+            "How many chips would you like to start with? Please enter a round number.\n"
+        )
+    )
+
+player1 = Player(starting_chips)
+bet_size = int(
+    input(
+        "How much would you like to bet?\n",
+    )
+)
+
+while type(bet_size) != int:
+    bet_size = int(
+        input("How much would you like to bet? Please enter a round number.")
+    )
+
+blackjack1.play(player1, bet_size)
+
+play_again = input("Play again? y/n\n").lower()
+
+while play_again == "y":
+    blackjack1.reset()
+    player1.reset()
+
+    if player1.has_chips == False:
+        print("Sorry, looks like youre out of chips. Better luck next time")
+        break
+
+    print(f"Your chips: {player1.chips}")
+    bet_size = int(input("How much would you like to bet?\n"))
+    while type(bet_size) != int:
+        bet_size = int(
+            input("How much would you like to bet? Please enter a round number.")
+        )
+    blackjack1.play(player1, bet_size)
+    play_again = input("Play again? y/n\n").lower()
+
+
+if play_again == "n":
+    print("Thanks for playing!")
+    print(
+        f"""
+          Starting chips: {starting_chips}
+          Final chips: {player1.chips}
+          """
+    )
+    if player1.chips >= starting_chips:
+        print(f"Amount won:{player1.chips - starting_chips}")
+    else:
+        print(f"Amount lost:{player1.chips - starting_chips}")
