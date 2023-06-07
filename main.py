@@ -129,7 +129,6 @@ welcome_message = """
 | '--'B|| '--'L|| '--'A|| '--'C|| '--'K|| '--'J|| '--'A|| '--'C|| '--'K|
 `------'`------'`------'`------'`------'`------'`------'`------'`------'
   """
-
 blackjack1 = BlackJack("Lets play: Blackjack")
 print(welcome_message)
 print("welcome to Lets play Blackjack!")
@@ -177,15 +176,11 @@ while play_again == "y":
     play_again = input("Play again? y/n\n").lower()
 
 
-if play_again == "n":
-    print("Thanks for playing!")
-    print(
-        f"""
-Starting chips: {starting_chips}
-Final chips: {player1.chips}
-"""
-    )
-    if player1.chips >= starting_chips:
-        print(f"Amount won:{player1.chips - starting_chips}")
-    else:
-        print(f"Amount lost:{player1.chips - starting_chips}")
+print("Thanks for playing!")
+print(f"Starting chips: {starting_chips}")
+print(f"Final chips: {player1.chips}")
+
+if player1.chips >= starting_chips:
+    print(f"Amount won:{player1.chips - starting_chips}")
+else:
+    print(f"Amount lost:{player1.chips - starting_chips}")
