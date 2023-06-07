@@ -71,23 +71,28 @@ class BlackJack:
             if choice == "s":
                 while self.total < 17:
                     self.draw_cards()
-                print("dealers cards:")
 
+                print("dealers cards:")
                 for i in self.cards:
                     print(i["face"])
+
                 if (self.total > 21) or (self.total < 21 and self.total < player.total):
                     print(f"You win +${bet}")
                     print(f"Dealer Total: {self.total}\nYour Total: {player.total}")
                     player.chips += bet
-                    break
+
                 elif (self.total < 21) and (self.total > player.total):
                     print(f"Dealer wins -${bet}")
                     print(f"Dealer Total: {self.total}\nYour Total: {player.total}")
                     player.chips -= bet
-                    break
 
                 elif self.total == player.total:
                     print("Tie")
+
+                else:
+                    print("Error")
+
+                return
 
 
 class Player:
@@ -163,6 +168,7 @@ while play_again == "y":
 
     print(f"Your chips: {player1.chips}")
     bet_size = int(input("How much would you like to bet?\n"))
+
     while type(bet_size) != int:
         bet_size = int(
             input("How much would you like to bet? Please enter a round number.")
@@ -175,9 +181,9 @@ if play_again == "n":
     print("Thanks for playing!")
     print(
         f"""
-          Starting chips: {starting_chips}
-          Final chips: {player1.chips}
-          """
+Starting chips: {starting_chips}
+Final chips: {player1.chips}
+"""
     )
     if player1.chips >= starting_chips:
         print(f"Amount won:{player1.chips - starting_chips}")
