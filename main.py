@@ -2,6 +2,8 @@ import csv, random
 
 
 class BlackJack:
+    # open deck.csv, turn it into a DictReader,
+    # and add it all to a deck list
     deck = []
     with open("deck.csv") as deck_csv:
         deck_dict = csv.DictReader(deck_csv)
@@ -15,11 +17,14 @@ class BlackJack:
         self.total = 0
 
     def __repr__(self):
-        return f"Hello and welcome to {self.name}!"
+        return list(self.cards), self.total
 
+    # to reset between games
     def reset(self):
         self.cards, self.total = [], 0
 
+    # pick n number of random cards and add them to either
+    # the Player or Blackjack Objects card list
     def draw_cards(self, num=1, player=None):
         for i in range(num):
             random_card = random.choice(self.deck)
@@ -129,6 +134,7 @@ welcome_message = """
 | '--'B|| '--'L|| '--'A|| '--'C|| '--'K|| '--'J|| '--'A|| '--'C|| '--'K|
 `------'`------'`------'`------'`------'`------'`------'`------'`------'
   """
+# print ascii art and and git input for bet/starting chips
 blackjack1 = BlackJack("Lets play: Blackjack")
 print(welcome_message)
 print("welcome to Lets play Blackjack!")
@@ -156,7 +162,10 @@ while type(bet_size) != int:
 blackjack1.play(player1, bet_size)
 
 play_again = input("Play again? y/n\n").lower()
+while play_again != "y" and play_again != "n":
+    play_again = input("Play again? Please enter 'y' or 'n'\n").lower()
 
+# loop to continue playing subsequent games
 while play_again == "y":
     blackjack1.reset()
     player1.reset()
