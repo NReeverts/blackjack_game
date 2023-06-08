@@ -86,16 +86,13 @@ class BlackJack:
                     print(f"Dealer Total: {self.total}\nYour Total: {player.total}")
                     player.chips += bet
 
-                elif (self.total < 21) and (self.total > player.total):
+                elif (self.total <= 21) and (self.total > player.total):
                     print(f"Dealer wins -${bet}")
                     print(f"Dealer Total: {self.total}\nYour Total: {player.total}")
                     player.chips -= bet
 
                 elif self.total == player.total:
                     print("Tie")
-
-                else:
-                    print("Error")
 
                 return
 
